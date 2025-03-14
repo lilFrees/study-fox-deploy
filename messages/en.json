@@ -1,0 +1,8 @@
+{
+  "locale": "en",
+  "main": {
+    "heading": "Main heading \n goes here",
+    "subheading": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit veritatis pariatur deleniti <br /> necessitatibus ipsum quaerat in, hic reiciendis eius iste.",
+    "trust": "10K+ students trust Study Fox"
+  }
+}
