@@ -1,8 +1,8 @@
 {
   "locale": "ru",
   "main": {
-    "heading": "Главный текст идет здесь",
+    "heading": "Главный текст \n идет здесь",
     "subheading": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit veritatis pariatur deleniti <br /> necessitatibus ipsum quaerat in, hic reiciendis eius iste.",
-    "trust": "10тыс. студентов доверяют нам"
+    "trust": "10+ тыс. студентов доверяют нам"
   }
 }
