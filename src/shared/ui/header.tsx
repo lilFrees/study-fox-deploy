@@ -47,7 +47,7 @@ function Header() {
       <div className="ml-auto">
         <Button
           type="text"
-          className="text-foreground h-8 w-8 border p-0"
+          className="h-8 w-8 border p-0"
           onClick={() => {
             setDarkMode(!darkMode);
             setTheme(darkMode ? "light" : "dark");
