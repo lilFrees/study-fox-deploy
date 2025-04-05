@@ -6,14 +6,21 @@ import { useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "./theme-provider";
 
 import "@ant-design/v5-patch-for-react-19";
+import LoadingLogo from "../ui/loading-logo";
 
 function AntdConfigProvider({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
-  const [darkMode, setDarkMode] = useState<boolean>(theme === "dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setDarkMode(theme === "dark");
-  }, [theme]);
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <LoadingLogo />;
+  }
+
+  const darkMode = theme === "dark";
 
   return (
     <ConfigProvider theme={darkMode ? darkTheme : lightTheme}>

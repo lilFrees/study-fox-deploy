@@ -8,7 +8,7 @@ const colors = {
   secondary_light: "#F3F4F6",
 
   lightBg: "#F8FAFC",
-  darkBg: "#0F172A",
+  darkBg: "#171717",
 
   success: "#14B8A6",
   success_dark: "#115E59",

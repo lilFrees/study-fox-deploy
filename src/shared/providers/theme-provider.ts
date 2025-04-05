@@ -39,18 +39,18 @@ export const lightTheme: ThemeConfig = {
       primaryShadow: "none",
       colorPrimary: colors.primary,
 
-      borderRadius: 8,
+      borderRadius: 16,
       contentLineHeight: 1.2, // 19px
       fontSize: 15,
     },
     Input: {
       controlHeight: 38,
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       colorTextPlaceholder: colors.secondary,
     },
     DatePicker: {
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       colorTextPlaceholder: colors.secondary,
       borderRadiusSM: 200,
@@ -58,7 +58,7 @@ export const lightTheme: ThemeConfig = {
       // cellWidth: 35,
     },
     Select: {
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       optionSelectedBg: colors.secondary_light,
       optionSelectedFontWeight: "inherit",
@@ -96,7 +96,7 @@ export const lightTheme: ThemeConfig = {
     Pagination: {
       itemActiveBg: colors.border,
       itemSize: 38,
-      borderRadius: 8,
+      borderRadius: 16,
       colorPrimary: colors.secondary,
       colorPrimaryHover: colors.secondary,
     },
@@ -179,31 +179,28 @@ export const darkTheme: ThemeConfig = {
       primaryShadow: "none",
       colorPrimary: colors.primary,
 
-      borderRadius: 8,
+      borderRadius: 16,
       contentLineHeight: 1.2, // 19px
       fontSize: 15,
     },
     Input: {
       controlHeight: 38,
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       colorTextPlaceholder: colors.secondary,
       colorBgContainer: colors.darkBg,
     },
     DatePicker: {
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       borderRadiusSM: 200,
       colorBgContainer: colors.darkBg,
       colorTextPlaceholder: colors.secondary,
       cellActiveWithRangeBg: colors.secondary_dark,
       colorIcon: colors.secondary_dark,
-
-      // cellHeight: 35,
-      // cellWidth: 35,
     },
     Select: {
-      borderRadius: 8,
+      borderRadius: 16,
       fontSize: 15,
       optionSelectedBg: colors.primary_dark,
       optionSelectedFontWeight: "inherit",
@@ -243,7 +240,7 @@ export const darkTheme: ThemeConfig = {
     Pagination: {
       itemActiveBg: colors.secondary_dark,
       itemSize: 38,
-      borderRadius: 8,
+      borderRadius: 16,
       colorPrimary: colors.secondary,
       colorPrimaryHover: colors.secondary,
     },
