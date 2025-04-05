@@ -73,7 +73,7 @@ function MainPage() {
           </Typography.Text>
         </div>
       </div>
-      <div className="relative basis-1/2">
+      <div className="relative basis-1/2 self-center">
         <Image
           src="/eclipse.png"
           alt="Eclipse"

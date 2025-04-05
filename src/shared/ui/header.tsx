@@ -3,9 +3,7 @@
 import { Button } from "antd";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useState } from "react";
 import { AiFillMoon, AiFillSun } from "react-icons/ai";
-import { setCookie } from "cookies-next";
 
 const headerLinks: any = [
   // {
@@ -27,8 +25,8 @@ const headerLinks: any = [
 ];
 
 function Header() {
-  const { setTheme } = useTheme();
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const { setTheme, theme } = useTheme();
+  const isDark = theme === "dark" || theme === "system";
   return (
     <div className="container mx-auto flex w-full items-center gap-10 p-4">
       <Link
@@ -49,12 +47,10 @@ function Header() {
           type="text"
           className="h-8 w-8 border p-0"
           onClick={() => {
-            setDarkMode(!darkMode);
-            setTheme(darkMode ? "light" : "dark");
-            setCookie("theme", darkMode ? "light" : "dark");
+            setTheme(isDark ? "light" : "dark");
           }}
         >
-          {darkMode ? (
+          {isDark ? (
             <AiFillMoon className="text-[20px]" />
           ) : (
             <AiFillSun className="text-[20px]" />

@@ -1,12 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { ConfigProvider } from "antd";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+
 import { darkTheme, lightTheme } from "./theme-provider";
+import LoadingLogo from "../ui/loading-logo";
 
 import "@ant-design/v5-patch-for-react-19";
-import LoadingLogo from "../ui/loading-logo";
 
 function AntdConfigProvider({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
@@ -20,7 +22,7 @@ function AntdConfigProvider({ children }: { children: React.ReactNode }) {
     return <LoadingLogo />;
   }
 
-  const darkMode = theme === "dark";
+  const darkMode = theme === "dark" || theme === "system";
 
   return (
     <ConfigProvider theme={darkMode ? darkTheme : lightTheme}>
