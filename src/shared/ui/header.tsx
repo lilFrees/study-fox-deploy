@@ -26,9 +26,9 @@ const headerLinks: any = [
 
 function Header() {
   const { setTheme, theme } = useTheme();
-  const isDark = theme === "dark" || theme === "system";
+  const isDark = theme === "dark";
   return (
-    <div className="container mx-auto flex w-full items-center gap-10 p-4">
+    <div className="relative z-20 container mx-auto flex w-full items-center gap-10 p-4">
       <Link
         href="/"
         className="text-primary block w-max font-sans font-black tracking-[3px]"

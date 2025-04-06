@@ -1,11 +1,13 @@
 "use client";
 
-import LineStackIcon from "@/shared/icons/lines-stack";
-import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 import { Button, Input, Typography } from "antd";
-import Image from "next/image";
-import { BsStars } from "react-icons/bs";
 import { PiPaperclipHorizontal } from "react-icons/pi";
+import { BsStars } from "react-icons/bs";
+
+import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
+
+import BgEclipse from "@/shared/icons/bg-shape";
+import LineStackIcon from "@/shared/icons/lines-stack";
 
 function MainPage() {
   const { setFile } = useUploadedFileStore();
@@ -24,7 +26,7 @@ function MainPage() {
 
   return (
     <div className="container mx-auto mt-10 flex gap-5 px-2">
-      <div className="basis-1/2 space-y-10 pb-[185px]">
+      <div className="z-20 basis-1/2 space-y-10 pb-[185px]">
         <Typography.Title
           level={1}
           className="font-mono text-6xl leading-[66px] font-normal"
@@ -38,7 +40,7 @@ function MainPage() {
         </Typography.Paragraph>
         <Input
           size="large"
-          className="h-[72px] border border-gray-600 bg-white font-mono text-lg placeholder:text-gray-600"
+          className="h-[72px] border border-gray-600 bg-white font-mono text-lg text-black placeholder:text-gray-600"
           placeholder="Choose popular quiz themes"
           suffix={
             <Button
@@ -73,13 +75,8 @@ function MainPage() {
           </Typography.Text>
         </div>
       </div>
-      <div className="relative basis-1/2 self-center">
-        <Image
-          src="/eclipse.png"
-          alt="Eclipse"
-          fill
-          className="h-full w-full object-contain"
-        />
+      <div className="flex basis-1/2 items-center justify-center self-center">
+        <BgEclipse className="blur-[90px]" />
       </div>
     </div>
   );
