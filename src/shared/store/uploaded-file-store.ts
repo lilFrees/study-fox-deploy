@@ -1,7 +1,22 @@
 import { create } from "zustand";
-import { IUploadedFileStore } from "../types";
+import { persist } from "zustand/middleware";
 
-export const useUploadedFileStore = create<IUploadedFileStore>((set) => ({
-  file: null,
-  setFile: (file: File | null) => set({ file }),
-}));
+export interface IUploadedFile {
+  name: string;
+  url: string;
+}
+
+export interface IUploadedFileStore {
+  file: IUploadedFile | null;
+  setFile: (file: IUploadedFile | null) => void;
+}
+
+export const useUploadedFileStore = create<IUploadedFileStore>()(
+  persist(
+    (set) => ({
+      file: null,
+      setFile: (file) => set({ file }),
+    }),
+    { name: "uploaded-study-material" },
+  ),
+);

@@ -61,7 +61,11 @@ function Header() {
         <Button type="text" size="large" className="text-black dark:text-white">
           Sign in
         </Button>
-        <Button type="primary" size="large" className="">
+        <Button
+          type="primary"
+          size="large"
+          className="bg-foreground text-background"
+        >
           Create free account
         </Button>
       </div>
