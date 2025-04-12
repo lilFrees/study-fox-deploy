@@ -5,7 +5,7 @@ async function NextIntlProvider({
   locale,
 }: {
   children: React.ReactNode;
-  locale: string;
+  locale?: string;
 }) {
   const messages = await import(`../../../messages/${locale}.json`);
 

@@ -6,9 +6,7 @@ import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import Header from "@/shared/ui/header";
 
-import AntdConfigProvider from "@/shared/providers/antd-config-provider";
-import NextIntlProvider from "@/shared/providers/next-intl-provider";
-import NextThemeProvider from "@/shared/providers/next-theme-provider";
+import Providers from "@/shared/providers";
 import "../globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -44,14 +42,10 @@ export default async function LocalalizedLayout({
       <body
         className={`${plusJakartaSans.variable} ${raleway.variable} bg-background font-mono antialiased`}
       >
-        <NextIntlProvider locale={locale}>
-          <NextThemeProvider>
-            <AntdConfigProvider>
-              <Header />
-              {children}
-            </AntdConfigProvider>
-          </NextThemeProvider>
-        </NextIntlProvider>
+        <Providers locale={locale}>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -1,9 +1,10 @@
 "use client";
 
 import { Button } from "antd";
-import { useTheme } from "next-themes";
 import Link from "next/link";
-import { AiFillMoon, AiFillSun } from "react-icons/ai";
+import { usePathname } from "next/navigation";
+import DarkModeBtn from "./dark-mode-btn";
+import Logo from "./logo";
 
 const headerLinks: any = [
   // {
@@ -25,16 +26,15 @@ const headerLinks: any = [
 ];
 
 function Header() {
-  const { setTheme, theme } = useTheme();
-  const isDark = theme === "dark";
+  const pathname = usePathname();
+
+  if (pathname.includes("auth")) {
+    return null;
+  }
+
   return (
     <div className="relative z-20 container mx-auto flex w-full items-center gap-10 p-4">
-      <Link
-        href="/"
-        className="text-primary block w-max font-sans font-black tracking-[3px]"
-      >
-        STUDY FOX
-      </Link>
+      <Logo />
       <div className="flex items-center gap-8">
         {headerLinks?.map((link: any, i: number) => (
           <Link href={link.href} key={i} className="text-foreground w-max">
@@ -43,31 +43,24 @@ function Header() {
         ))}
       </div>
       <div className="ml-auto">
-        <Button
-          type="text"
-          className="h-8 w-8 border p-0"
-          onClick={() => {
-            setTheme(isDark ? "light" : "dark");
-          }}
-        >
-          {isDark ? (
-            <AiFillMoon className="text-[20px]" />
-          ) : (
-            <AiFillSun className="text-[20px]" />
-          )}
-        </Button>
+        <DarkModeBtn />
       </div>
       <div className="flex items-center gap-5">
-        <Button type="text" size="large" className="text-black dark:text-white">
+        <Button
+          type="link"
+          href="/auth/sign-in"
+          size="large"
+          className="text-black dark:text-white"
+        >
           Sign in
         </Button>
-        <Button
+        {/* <Button
           type="primary"
           size="large"
           className="bg-foreground text-background"
         >
           Create free account
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
