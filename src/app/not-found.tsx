@@ -1,5 +1,7 @@
+"use client";
+
 import Providers from "@/shared/providers";
-import { Button } from "antd";
+import { Button, Typography } from "antd";
 import { Plus_Jakarta_Sans, Raleway } from "next/font/google";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -20,7 +22,9 @@ function NotFoundPage() {
       >
         <Providers>
           <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
-            <h1 className="text-foreground text-3xl">Page not found</h1>
+            <Typography.Title className="text-4xl">
+              Page not found
+            </Typography.Title>
             <Button type="primary" href="/">
               Go back home
             </Button>

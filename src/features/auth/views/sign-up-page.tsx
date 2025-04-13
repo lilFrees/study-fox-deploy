@@ -1,18 +1,17 @@
 "use client";
 
-import { Button, Form, Input, Typography } from "antd";
-import { FcGoogle } from "react-icons/fc";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-
 import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
+import { Button, Form, Input, Typography } from "antd";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
-function SignInPage() {
+function SignUpPage() {
   const searchParams = useSearchParams();
   return (
     <div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl border border-slate-300 bg-white p-10 shadow-md">
       <Typography.Title level={2} className="mb-0 text-center font-sans">
-        Welcome back
+        Join Study Fox
       </Typography.Title>
       <Typography.Paragraph type="secondary" className="text-center">
         Please enter your details
@@ -30,7 +29,7 @@ function SignInPage() {
           size="large"
           htmlType="submit"
         >
-          Sign in to your account
+          Create an account
         </Button>
         <Button
           className="mt-5 flex w-full items-center gap-2"
@@ -43,7 +42,7 @@ function SignInPage() {
         </Button>
       </Form>
       <Typography.Paragraph className="text-center text-sm">
-        Don&apos;t have account yet? Register{" "}
+        Already have an account? Sign in{" "}
         <Link
           href={{
             pathname: "/auth/sign-in",
@@ -58,4 +57,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignUpPage;

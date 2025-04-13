@@ -48,19 +48,20 @@ function Header() {
       <div className="flex items-center gap-5">
         <Button
           type="link"
-          href="/auth/sign-in"
+          href="/auth/sign-in?source=auth"
           size="large"
           className="text-black dark:text-white"
         >
           Sign in
         </Button>
-        {/* <Button
+        <Button
           type="primary"
+          href="/auth/sign-up?source=auth"
           size="large"
           className="bg-foreground text-background"
         >
           Create free account
-        </Button> */}
+        </Button>
       </div>
     </div>
   );
