@@ -2,7 +2,7 @@ import { notification } from "antd";
 import axios, { AxiosError } from "axios";
 import { getCookie } from "cookies-next";
 
-export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseURL = window.process.env.NEXT_PUBLIC_BASE_URL;
 
 const request = axios.create({
   baseURL,
