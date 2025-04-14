@@ -1,7 +1,7 @@
 "use client";
 
 import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Card, Form, Input, Typography } from "antd";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -9,7 +9,18 @@ import { FcGoogle } from "react-icons/fc";
 function SignUpPage() {
   const searchParams = useSearchParams();
   return (
-    <div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl border border-slate-300 bg-white p-10 shadow-md">
+    <Card
+      className="w-full max-w-xl flex-col gap-4 p-6"
+      variant="borderless"
+      styles={{
+        body: {
+          padding: "0",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        },
+      }}
+    >
       <Typography.Title level={2} className="mb-0 text-center font-sans">
         Join Study Fox
       </Typography.Title>
@@ -53,7 +64,7 @@ function SignUpPage() {
           here
         </Link>
       </Typography.Paragraph>
-    </div>
+    </Card>
   );
 }
 

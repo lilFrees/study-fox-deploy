@@ -38,26 +38,38 @@ function MainHeading() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Vehicula
         massa in enim luctus. Rutrum arcu.
       </Typography.Paragraph>
-      <Input
-        size="large"
-        className="shadow-primary h-[72px] rounded-2xl border border-gray-400 bg-white font-mono text-lg text-black shadow-[0_4px_4px] placeholder:text-gray-600 dark:shadow-[#702DFF]"
-        placeholder="Choose popular quiz themes"
-        suffix={
-          <Button
-            size="large"
-            className="rounded-[10px] bg-black text-white"
-            type="primary"
-            icon={<BsStars className="text-lg" />}
-          >
-            Generate
-          </Button>
-        }
-        prefix={
-          <Button type="text" size="large" onClick={handleClick}>
-            <PiPaperclipHorizontal className="rotate-90 text-lg text-black" />
-          </Button>
-        }
-      />
+      <div className="relative transition-all duration-500 ease-in-out hover:scale-105">
+        <Input.TextArea
+          size="large"
+          className="shadow-primary mb-0 h-16 scroll-pr-10 rounded-2xl border border-gray-400 bg-white pt-4 pl-10 font-mono text-lg text-black shadow-[0_4px_4px] transition-all duration-500 ease-in-out placeholder:text-gray-600 focus:h-28 dark:shadow-[#702DFF]"
+          placeholder="Choose popular quiz themes"
+          rows={5}
+        />
+        <Button
+          type="link"
+          size="large"
+          onClick={handleClick}
+          className="absolute top-2 left-0"
+        >
+          <PiPaperclipHorizontal className="rotate-90 text-lg text-black" />
+        </Button>
+        <Button
+          size="large"
+          className="absolute top-2 right-2 rounded-[10px] bg-black text-white"
+          type="primary"
+          icon={<BsStars className="text-lg" />}
+        >
+          Generate
+        </Button>
+      </div>
+
+      <Typography.Paragraph
+        type="secondary"
+        className="cursor-pointer text-right text-sm"
+      >
+        Try it out with an{" "}
+        <span className="text-slate-700 underline">example</span>
+      </Typography.Paragraph>
 
       <div className="flex items-center gap-5">
         <Typography.Text className="font-sans text-[42px] font-medium">

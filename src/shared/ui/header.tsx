@@ -29,7 +29,14 @@ function Header() {
   const pathname = usePathname();
 
   if (pathname.includes("auth")) {
-    return null;
+    return (
+      <div className="relative z-20 container mx-auto flex w-full items-center gap-10 p-4">
+        <Logo />
+        <div className="ml-auto">
+          <DarkModeBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

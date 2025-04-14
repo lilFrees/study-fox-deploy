@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Card, Form, Input, Typography } from "antd";
 import { FcGoogle } from "react-icons/fc";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -10,7 +10,18 @@ import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
 function SignInPage() {
   const searchParams = useSearchParams();
   return (
-    <div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl border border-slate-300 bg-white p-10 shadow-md">
+    <Card
+      className="w-full max-w-xl flex-col gap-4 p-6"
+      variant="borderless"
+      styles={{
+        body: {
+          padding: "0",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+        },
+      }}
+    >
       <Typography.Title level={2} className="mb-0 text-center font-sans">
         Welcome back
       </Typography.Title>
@@ -46,7 +57,7 @@ function SignInPage() {
         Don&apos;t have account yet? Register{" "}
         <Link
           href={{
-            pathname: "/auth/sign-in",
+            pathname: "/auth/sign-up",
             query: Object.fromEntries(searchParams.entries()),
           }}
           className="text-primary hover:text-primary/80 underline"
@@ -54,7 +65,7 @@ function SignInPage() {
           here
         </Link>
       </Typography.Paragraph>
-    </div>
+    </Card>
   );
 }
 

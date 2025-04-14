@@ -1,7 +1,7 @@
 "use client";
 
 import BgEclipse from "@/shared/icons/bg-shape";
-import MainHeading from "../components/main-heading";
+import MainHeading from "../containers/main-heading";
 import { useTheme } from "next-themes";
 
 function MainPage() {
