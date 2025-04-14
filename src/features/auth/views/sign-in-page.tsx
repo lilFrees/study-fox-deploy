@@ -11,7 +11,7 @@ function SignInPage() {
   const searchParams = useSearchParams();
   return (
     <Card
-      className="w-full max-w-xl flex-col gap-4 p-6"
+      className="w-full max-w-xl p-6"
       variant="borderless"
       styles={{
         body: {

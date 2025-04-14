@@ -5,9 +5,6 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
-  if (!auth) {
-    throw new Error("Firebase auth instance is not initialized.");
-  }
   const res = await signInWithPopup(auth, provider);
   const user = res.user;
   useAuthStore.setState({ user });
