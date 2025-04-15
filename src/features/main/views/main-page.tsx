@@ -6,6 +6,8 @@ import { useTheme } from "next-themes";
 
 function MainPage() {
   const { theme } = useTheme();
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log(url);
   return (
     <div className="container mx-auto mt-10 flex gap-5 px-2">
       <MainHeading />
