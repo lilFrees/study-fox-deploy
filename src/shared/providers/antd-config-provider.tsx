@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { ConfigProvider } from "antd";
+import { App, ConfigProvider } from "antd";
 import { useTheme } from "next-themes";
 
 import { darkTheme, lightTheme } from "./theme-provider";
@@ -26,7 +26,7 @@ function AntdConfigProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ConfigProvider theme={darkMode ? darkTheme : lightTheme}>
-      {children}
+      <App>{children}</App>
     </ConfigProvider>
   );
 }

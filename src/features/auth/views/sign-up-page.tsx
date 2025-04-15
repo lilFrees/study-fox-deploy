@@ -1,13 +1,20 @@
 "use client";
 
 import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
-import { Button, Card, Form, Input, Typography } from "antd";
+import { App, Button, Card, Form, Input, Typography } from "antd";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 function SignUpPage() {
   const searchParams = useSearchParams();
+  const { message } = App.useApp();
+
+  const handleGoogleSignUp = async () => {
+    await signInWithGoogle();
+    await message.success("You have successfully logged in with Google");
+  };
+
   return (
     <Card
       className="w-full max-w-xl flex-col gap-4 p-6"
@@ -46,7 +53,7 @@ function SignUpPage() {
           className="mt-5 flex w-full items-center gap-2"
           size="large"
           type="text"
-          onClick={signInWithGoogle}
+          onClick={handleGoogleSignUp}
         >
           <FcGoogle />
           Continue with Google
