@@ -1,21 +1,28 @@
-"use client";
-
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import {
+  API_KEY,
+  APP_ID,
+  AUTH_DOMAIN,
+  MEASUREMENT_ID,
+  MESSAGING_SENDER_ID,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+} from "./env";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env?.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env?.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env?.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env?.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env?.NEXT_PUBLIC_MESSAGESENDER_ID,
-  appId: process.env?.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env?.NEXT_PUBLIC_MEASURMENT_ID,
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
 };
 
 // Initialize Firebase
