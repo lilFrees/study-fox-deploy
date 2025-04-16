@@ -35,6 +35,9 @@ function SignUpPage() {
         Please enter your details
       </Typography.Paragraph>
       <Form layout="vertical">
+        <Form.Item label="Your name" name="name">
+          <Input size="large" color="#FFF" />
+        </Form.Item>
         <Form.Item label="Email" name="email">
           <Input size="large" color="#FFF" />
         </Form.Item>
