@@ -25,13 +25,15 @@ function MainContentUpload() {
   };
 
   return (
-    <div className="relative transition-all duration-500 ease-in-out hover:scale-105">
-      <Input.TextArea
-        size="large"
-        className="shadow-primary mb-0 h-16 scroll-pr-10 rounded-2xl border border-gray-400 bg-white pt-4 pl-10 font-mono text-lg text-black shadow-[0_4px_4px] transition-all duration-500 ease-in-out placeholder:text-gray-600 focus:h-28 dark:shadow-[#702DFF]"
-        placeholder="Choose popular quiz themes"
-        rows={5}
-      />
+    <div className="shadow-primary relative h-16 w-full overflow-hidden rounded-2xl border border-gray-400 shadow-[0_4px_4px] transition-all duration-500 ease-in-out focus-within:h-32 hover:scale-105 dark:shadow-[#702DFF]">
+      <div className="absolute top-0 -right-5 bottom-0 left-0 overflow-auto">
+        <Input.TextArea
+          size="large"
+          className="mb-0 h-full border-0 bg-white pl-10 font-mono text-lg text-black placeholder:text-gray-600"
+          placeholder="Choose popular quiz themes"
+          rows={5}
+        />
+      </div>
       <Button
         type="link"
         size="large"

@@ -23,7 +23,9 @@ function MainHeading() {
         className="cursor-pointer text-right text-sm"
       >
         Try it out with an{" "}
-        <span className="text-slate-700 underline">example</span>
+        <span className="text-slate-800 underline dark:text-slate-300">
+          example
+        </span>
       </Typography.Paragraph>
       <div className="flex items-center gap-5">
         <Typography.Text className="font-sans text-[42px] font-medium">
