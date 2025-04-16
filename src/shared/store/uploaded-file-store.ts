@@ -9,6 +9,8 @@ export interface IUploadedFile {
 export interface IUploadedFileStore {
   file: IUploadedFile | null;
   setFile: (file: IUploadedFile | null) => void;
+  textContent: string | null;
+  setTextContent: (textContent: string | null) => void;
 }
 
 export const useUploadedFileStore = create<IUploadedFileStore>()(
@@ -16,6 +18,8 @@ export const useUploadedFileStore = create<IUploadedFileStore>()(
     (set) => ({
       file: null,
       setFile: (file) => set({ file }),
+      textContent: null,
+      setTextContent: (textContent) => set({ textContent }),
     }),
     { name: "uploaded-study-material" },
   ),
