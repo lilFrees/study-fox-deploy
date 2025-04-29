@@ -6,6 +6,7 @@ export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const request = axios.create({
   baseURL,
+  withCredentials: true,
 });
 
 request.interceptors.request.use(

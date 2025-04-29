@@ -5,15 +5,24 @@ import { App, Button, Card, Form, Input, Typography } from "antd";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { ISignUpForm } from "../types";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "../api";
 
 function SignUpPage() {
   const searchParams = useSearchParams();
   const { message } = App.useApp();
+  const [form] = Form.useForm<ISignUpForm>();
 
   const handleGoogleSignUp = async () => {
     await signInWithGoogle();
     await message.success("You have successfully logged in with Google");
   };
+
+  const { mutate: signUpMutation, isPending } = useMutation({
+    mutationKey: ["sign-up"],
+    mutationFn: signUp,
+  });
 
   return (
     <Card
@@ -34,14 +43,19 @@ function SignUpPage() {
       <Typography.Paragraph type="secondary" className="text-center">
         Please enter your details
       </Typography.Paragraph>
-      <Form layout="vertical">
-        <Form.Item label="Your name" name="name">
+      <Form
+        layout="vertical"
+        form={form}
+        className="flex flex-col gap-3"
+        onFinish={(values) => signUpMutation({ ...values, lastName: "" })}
+      >
+        <Form.Item label="Your name" name="firstName">
           <Input size="large" color="#FFF" />
         </Form.Item>
         <Form.Item label="Email" name="email">
           <Input size="large" color="#FFF" />
         </Form.Item>
-        <Form.Item name="password" label="Password" className="mt-5">
+        <Form.Item name="password" label="Password">
           <Input.Password size="large" />
         </Form.Item>
         <Button
@@ -49,19 +63,20 @@ function SignUpPage() {
           className="mt-5 w-full"
           size="large"
           htmlType="submit"
+          loading={isPending}
         >
           Create an account
         </Button>
-        <Button
-          className="mt-5 flex w-full items-center gap-2"
-          size="large"
-          type="text"
-          onClick={handleGoogleSignUp}
-        >
-          <FcGoogle />
-          Continue with Google
-        </Button>
       </Form>
+      <Button
+        className="mt-5 flex w-full items-center gap-2"
+        size="large"
+        type="text"
+        onClick={handleGoogleSignUp}
+      >
+        <FcGoogle />
+        Continue with Google
+      </Button>
       <Typography.Paragraph className="text-center text-sm">
         Already have an account? Sign in{" "}
         <Link

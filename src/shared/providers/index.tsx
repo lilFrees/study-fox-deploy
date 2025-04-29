@@ -1,6 +1,7 @@
 import AntdConfigProvider from "./antd-config-provider";
 import NextIntlProvider from "./next-intl-provider";
 import NextThemeProvider from "./next-theme-provider";
+import QueryProvider from "./query-provider";
 
 function Providers({
   children,
@@ -12,7 +13,9 @@ function Providers({
   if (!locale) {
     return (
       <NextThemeProvider>
-        <AntdConfigProvider>{children}</AntdConfigProvider>
+        <QueryProvider>
+          <AntdConfigProvider>{children}</AntdConfigProvider>
+        </QueryProvider>
       </NextThemeProvider>
     );
   }
@@ -20,7 +23,9 @@ function Providers({
   return (
     <NextIntlProvider locale={locale}>
       <NextThemeProvider>
-        <AntdConfigProvider>{children}</AntdConfigProvider>
+        <QueryProvider>
+          <AntdConfigProvider>{children}</AntdConfigProvider>
+        </QueryProvider>
       </NextThemeProvider>
     </NextIntlProvider>
   );

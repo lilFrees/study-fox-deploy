@@ -6,15 +6,24 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
+import { useMutation } from "@tanstack/react-query";
+import { signIn } from "../api";
+import { ISignInForm } from "../types";
 
 function SignInPage() {
   const searchParams = useSearchParams();
   const { message } = App.useApp();
+  const [form] = Form.useForm<ISignInForm>();
 
   const handleGoogleSignUp = async () => {
     await signInWithGoogle();
     await message.success("You have successfully logged in with Google");
   };
+
+  const { mutate: signInMutate, isPending } = useMutation({
+    mutationKey: ["sign-in"],
+    mutationFn: signIn,
+  });
 
   return (
     <Card
@@ -35,7 +44,12 @@ function SignInPage() {
       <Typography.Paragraph type="secondary" className="text-center">
         Please enter your details
       </Typography.Paragraph>
-      <Form layout="vertical">
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={signInMutate}
+        className="flex flex-col gap-3"
+      >
         <Form.Item label="Email" name="email">
           <Input size="large" color="#FFF" />
         </Form.Item>
@@ -47,19 +61,20 @@ function SignInPage() {
           className="mt-5 w-full"
           size="large"
           htmlType="submit"
+          loading={isPending}
         >
           Sign in to your account
         </Button>
-        <Button
-          className="mt-5 flex w-full items-center gap-2"
-          size="large"
-          type="text"
-          onClick={handleGoogleSignUp}
-        >
-          <FcGoogle />
-          Continue with Google
-        </Button>
       </Form>
+      <Button
+        className="mt-5 flex w-full items-center gap-2"
+        size="large"
+        type="text"
+        onClick={handleGoogleSignUp}
+      >
+        <FcGoogle />
+        Continue with Google
+      </Button>
       <Typography.Paragraph className="text-center text-sm">
         Don&apos;t have account yet? Register{" "}
         <Link
