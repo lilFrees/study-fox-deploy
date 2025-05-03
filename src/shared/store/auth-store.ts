@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { IUser } from "../types";
 
 export interface AuthStore {
-  user: any;
+  user: IUser | null;
   setUser: (user: any) => void;
 }
 

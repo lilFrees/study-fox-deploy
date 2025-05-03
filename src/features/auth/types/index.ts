@@ -8,3 +8,8 @@ export interface ISignUpForm {
   email: string;
   password: string;
 }
+
+export interface ISignInResponse {
+  jwtToken: string;
+  username: string;
+}

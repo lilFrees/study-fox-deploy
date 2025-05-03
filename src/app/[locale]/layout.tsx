@@ -40,7 +40,7 @@ export default async function LocalalizedLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${plusJakartaSans.variable} ${raleway.variable} bg-background font-mono antialiased`}
+        className={`${plusJakartaSans.variable} ${raleway.variable} bg-background h-full font-mono antialiased`}
       >
         <Providers locale={locale}>
           <Header />

@@ -17,7 +17,9 @@ function MainHeading() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Vehicula
         massa in enim luctus. Rutrum arcu.
       </Typography.Paragraph>
+
       <MainContentUpload />
+
       <Typography.Paragraph
         type="secondary"
         className="cursor-pointer text-right text-sm"

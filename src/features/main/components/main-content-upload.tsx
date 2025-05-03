@@ -1,18 +1,20 @@
 "use client";
 
-import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
+import { useCallback, useState } from "react";
+
 import { Button, Input } from "antd";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { PiPaperclipHorizontal } from "react-icons/pi";
 
+import { useAuthStore } from "@/shared/store/auth-store";
+import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
+import { useRouter } from "next/navigation";
+
 function MainContentUpload() {
   const [text, setText] = useState<string | null>(null);
-  const setFile = useUploadedFileStore((state) => state.setFile);
-  const setTextContent = useUploadedFileStore((state) => state.setTextContent);
-  const file = useUploadedFileStore((state) => state.file);
+  const { file, setFile, setTextContent } = useUploadedFileStore();
   const { push } = useRouter();
+  const { user } = useAuthStore();
 
   const handleClick = () => {
     const input = document.createElement("input");
@@ -30,11 +32,16 @@ function MainContentUpload() {
     input.click();
   };
 
-  const handleSubmit = () => {
-    if (text === null || file === null) return;
+  const handleSubmit = useCallback(() => {
+    if (text === null && file === null) return;
     setTextContent(text);
-    push("/auth/sign-up/?source=upload");
-  };
+
+    if (user !== null) {
+      push("/quiz-generation/?source=upload");
+    } else {
+      push("/auth/sign-up/?source=upload");
+    }
+  }, [text, file, setTextContent, user, push]);
 
   return (
     <div className="shadow-primary/50 relative h-16 w-full overflow-hidden rounded-2xl border border-gray-400 shadow-[0_4px_4px] transition-all duration-500 ease-in-out focus-within:h-32 hover:scale-105 dark:shadow-[#702DFF]/50">

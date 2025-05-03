@@ -1,28 +1,52 @@
 "use client";
 
 import { App, Button, Card, Form, Input, Typography } from "antd";
-import { FcGoogle } from "react-icons/fc";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "../api";
 import { ISignInForm } from "../types";
+import { IUser } from "@/shared/types";
 
 function SignInPage() {
   const searchParams = useSearchParams();
   const { message } = App.useApp();
   const [form] = Form.useForm<ISignInForm>();
+  const { push } = useRouter();
 
   const handleGoogleSignUp = async () => {
     await signInWithGoogle();
-    await message.success("You have successfully logged in with Google");
   };
 
   const { mutate: signInMutate, isPending } = useMutation({
     mutationKey: ["sign-in"],
     mutationFn: signIn,
+    onSuccess: async (data) => {
+      message.success("You have successfully signed up");
+      const user: IUser = {
+        displayName: "",
+        email: form.getFieldValue("email"),
+        photoUrl: "",
+        username: data.username,
+      };
+
+      await fetch("/api/set-token", {
+        method: "POST",
+        body: JSON.stringify({ token: data.jwtToken, user }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (searchParams.get("source") === "upload") {
+        push("/quiz-generation");
+      } else {
+        push("/profile");
+      }
+    },
   });
 
   return (
