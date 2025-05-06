@@ -15,12 +15,14 @@ import QuizLoading from "../containers/quiz-loading";
 import { Button, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useQuizStore } from "../store/quiz-store";
+import { useRouter } from "next/navigation";
 
 function QuizPreparePage() {
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
 
+  const { push } = useRouter();
   const { textContent, file } = useUploadedFileStore();
-  const { setQuestions } = useQuizStore();
+  const { setQuestions, setMode, setStatus } = useQuizStore();
   const { user } = useAuthStore();
 
   const progress = useMotionValue(0);
@@ -29,22 +31,22 @@ function QuizPreparePage() {
   const { isSuccess, isLoading } = useQuery({
     queryKey: ["quiz"],
     queryFn: () => {
-      // return new Promise((resolve) => {
-      //   setTimeout(() => {
-      //     resolve(true);
-      //   }, 5 * 1000);
-      // });
-      if (textContent) {
-        const response = generateQuizWithContext({
-          username: user?.username || "",
-          context: textContent,
-          quizCount: 10,
-        });
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(true);
+        }, 5 * 1000);
+      });
+      // if (textContent) {
+      //   const response = generateQuizWithContext({
+      //     username: user?.username || "",
+      //     context: textContent,
+      //     quizCount: 10,
+      //   });
 
-        response.then((r) => setQuestions(r));
+      //   response.then((r) => setQuestions(r));
 
-        return response;
-      }
+      //   return response;
+      // }
       // else if (file) {
       //   const formData = new FormData();
       //   formData.append("file", file.url);
@@ -109,28 +111,36 @@ function QuizPreparePage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <Typography.Text className="text-2xl uppercase">
-              Your quiz is ready
+            <Typography.Text className="text-2xl">
+              ✅Your quiz is ready
             </Typography.Text>
-            <Typography.Title
-              level={2}
-              className="text-[40px] font-bold uppercase"
-            >
-              Click below to start
+            <Typography.Title level={2} className="text-[40px] font-bold">
+              👇Click below to start
             </Typography.Title>
             <div className="flex w-full items-center justify-center gap-12">
               <Button
                 size="large"
-                className="w-full max-w-[450px] border-0 bg-gradient-to-t from-purple-500 to-fuchsia-800 text-lg text-white"
+                type="primary"
+                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300/70"
+                onClick={() => {
+                  setMode("timed");
+                  setStatus("pending");
+                  push("/quiz-play?mode=timed");
+                }}
               >
-                Timed Mode
+                ⏲️Timed Mode
               </Button>
               <Button
                 size="large"
                 type="primary"
-                className="to-primary w-full max-w-[450px] border-0 bg-gradient-to-t from-yellow-400"
+                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300/70"
+                onClick={() => {
+                  setMode("normal");
+                  setStatus("pending");
+                  push("/quiz-play?mode=normal");
+                }}
               >
-                Normal Mode
+                🧠Normal Mode
               </Button>
             </div>
           </motion.div>

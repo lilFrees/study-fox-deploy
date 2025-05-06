@@ -6,6 +6,8 @@ import { IUser } from "@/shared/types";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signIn, signUp, withGoogle } from ".";
 import { message } from "antd";
+import { useQuizStore } from "@/features/quiz/store/quiz-store";
+import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 
 const provider = new GoogleAuthProvider();
 
@@ -98,5 +100,16 @@ export async function registerWithPassword(data: {
     headers: {
       "Content-Type": "application/json",
     },
+  });
+}
+
+export async function signOut() {
+  localStorage.removeItem("access_token");
+  useAuthStore.setState({ user: null });
+  useQuizStore.setState({ questions: [], status: "stale", mode: null });
+  useUploadedFileStore.setState({ file: null, textContent: null });
+
+  await fetch("/api/sign-out", {
+    method: "POST",
   });
 }

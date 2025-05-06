@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DarkModeBtn from "./dark-mode-btn";
 import Logo from "./logo";
+import { useAuthStore } from "../store/auth-store";
+import ProfilePopover from "../components/profile-popover";
 
 const headerLinks: any = [
   // {
@@ -27,6 +29,7 @@ const headerLinks: any = [
 
 function Header() {
   const pathname = usePathname();
+  const { user } = useAuthStore();
 
   if (pathname.includes("auth")) {
     return (
@@ -52,24 +55,28 @@ function Header() {
       <div className="ml-auto">
         <DarkModeBtn />
       </div>
-      <div className="flex items-center gap-5">
-        <Button
-          type="link"
-          href="/auth/sign-in?source=auth"
-          size="large"
-          className="text-black dark:text-white"
-        >
-          Sign in
-        </Button>
-        <Button
-          type="primary"
-          href="/auth/sign-up?source=auth"
-          size="large"
-          className="bg-foreground text-background"
-        >
-          Create free account
-        </Button>
-      </div>
+      {user === null ? (
+        <div className="flex items-center gap-5">
+          <Button
+            type="link"
+            href="/auth/sign-in?source=auth"
+            size="large"
+            className="text-black dark:text-white"
+          >
+            Sign in
+          </Button>
+          <Button
+            type="primary"
+            href="/auth/sign-up?source=auth"
+            size="large"
+            className="bg-foreground text-background"
+          >
+            Create free account
+          </Button>
+        </div>
+      ) : (
+        <ProfilePopover />
+      )}
     </div>
   );
 }
