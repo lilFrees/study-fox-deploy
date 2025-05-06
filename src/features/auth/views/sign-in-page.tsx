@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
-import { signInWithGoogle } from "@/features/auth/api/firebase-auth";
+import {
+  signInWithGoogle,
+  signInWithPassword,
+} from "@/features/auth/api/auth-handlers";
 import { useMutation } from "@tanstack/react-query";
-import { signIn } from "../api";
 import { ISignInForm } from "../types";
-import { IUser } from "@/shared/types";
 
 function SignInPage() {
   const searchParams = useSearchParams();
@@ -17,30 +18,25 @@ function SignInPage() {
   const [form] = Form.useForm<ISignInForm>();
   const { push } = useRouter();
 
-  const handleGoogleSignUp = async () => {
-    await signInWithGoogle();
-  };
+  const { mutate: googleSignUpMutate, isPending: isGooglePending } =
+    useMutation({
+      mutationKey: ["sign-in"],
+      mutationFn: signInWithGoogle,
+      onSuccess: async () => {
+        message.success("You have successfully signed in");
+        if (searchParams.get("source") === "upload") {
+          push("/quiz-generation");
+        } else {
+          push("/profile");
+        }
+      },
+    });
 
   const { mutate: signInMutate, isPending } = useMutation({
     mutationKey: ["sign-in"],
-    mutationFn: signIn,
-    onSuccess: async (data) => {
-      message.success("You have successfully signed up");
-      const user: IUser = {
-        displayName: "",
-        email: form.getFieldValue("email"),
-        photoUrl: "",
-        username: data.username,
-      };
-
-      await fetch("/api/set-token", {
-        method: "POST",
-        body: JSON.stringify({ token: data.jwtToken, user }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+    mutationFn: signInWithPassword,
+    onSuccess: async () => {
+      message.success("You have successfully signed in");
       if (searchParams.get("source") === "upload") {
         push("/quiz-generation");
       } else {
@@ -94,7 +90,8 @@ function SignInPage() {
         className="mt-5 flex w-full items-center gap-2"
         size="large"
         type="text"
-        onClick={handleGoogleSignUp}
+        onClick={() => googleSignUpMutate()}
+        loading={isGooglePending}
       >
         <FcGoogle />
         Continue with Google

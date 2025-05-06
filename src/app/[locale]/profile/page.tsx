@@ -1,5 +1,5 @@
 function ProfilePage() {
-  return <div className="text-2xl">Profile page</div>;
+  return <div className="container mx-auto text-2xl">Profile page</div>;
 }
 
 export default ProfilePage;

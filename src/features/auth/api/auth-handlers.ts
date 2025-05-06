@@ -3,9 +3,9 @@
 import { auth } from "@/config/firebase";
 import { useAuthStore } from "@/shared/store/auth-store";
 import { IUser } from "@/shared/types";
-import { message } from "antd";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { withGoogle } from ".";
+import { signIn, signUp, withGoogle } from ".";
+import { message } from "antd";
 
 const provider = new GoogleAuthProvider();
 
@@ -33,6 +33,7 @@ export const signInWithGoogle = async () => {
       photoUrl: authUser.photoURL || "",
     };
 
+    localStorage.setItem("access_token", result.jwtToken);
     useAuthStore.setState({
       user,
     });
@@ -48,3 +49,54 @@ export const signInWithGoogle = async () => {
     console.error("Error signing in with Google: ", error);
   }
 };
+
+export async function signInWithPassword(data: {
+  email: string;
+  password: string;
+}) {
+  const { jwtToken, username } = await signIn(data);
+  const user: IUser = {
+    displayName: "",
+    email: data.email,
+    photoUrl: "",
+    username: username,
+  };
+
+  localStorage.setItem("access_token", jwtToken);
+  useAuthStore.setState({ user });
+
+  await fetch("/api/set-token", {
+    method: "POST",
+    body: JSON.stringify({ token: jwtToken, user }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+export async function registerWithPassword(data: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}) {
+  const { jwtToken, username } = await signUp(data);
+
+  const user: IUser = {
+    displayName: data?.firstName,
+    email: data?.email,
+    photoUrl: "",
+    username: username,
+  };
+
+  localStorage.setItem("access_token", jwtToken);
+  useAuthStore.setState({ user });
+
+  await fetch("/api/set-token", {
+    method: "POST",
+    body: JSON.stringify({ token: jwtToken, user }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

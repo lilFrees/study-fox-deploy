@@ -39,6 +39,13 @@ export default async function LocalalizedLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      {/* <head>
+        <script
+          crossOrigin="anonymous"
+          src="//unpkg.com/react-scan/dist/auto.global.js"
+          async
+        />
+      </head> */}
       <body
         className={`${plusJakartaSans.variable} ${raleway.variable} bg-background h-full font-mono antialiased`}
       >

@@ -10,7 +10,7 @@ function MainPage() {
   return (
     <div className="container mx-auto mt-10 flex gap-5 px-2">
       <MainHeading />
-      <div className="flex basis-1/2 items-center justify-center self-center border">
+      <div className="flex basis-1/2 items-center justify-center self-center">
         <BgEclipse
           gradientcolor={theme === "dark" ? "blue" : "orange"}
           className="blur-[90px]"
