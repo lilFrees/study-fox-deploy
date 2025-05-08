@@ -46,6 +46,11 @@ request.interceptors.response.use(
             message: (error?.response?.data as any)?.[key],
           });
         });
+      } else {
+        notification.error({
+          message: "Something went wrong, please try again later ",
+          icon: "❌",
+        });
       }
     }
     return Promise.reject(error);

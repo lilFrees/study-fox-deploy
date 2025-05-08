@@ -31,7 +31,7 @@ function Header() {
   const pathname = usePathname();
   const { user } = useAuthStore();
 
-  if (pathname.includes("auth")) {
+  if (pathname.includes("auth") || pathname.includes("quiz-play")) {
     return (
       <div className="relative z-20 container mx-auto flex w-full items-center gap-10 p-4">
         <Logo />

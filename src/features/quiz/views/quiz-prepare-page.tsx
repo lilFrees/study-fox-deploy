@@ -11,7 +11,7 @@ import {
   useTransform,
 } from "motion/react";
 import { generateQuizWithContext, generateQuizWithFile } from "../api";
-import QuizLoading from "../containers/quiz-loading";
+import QuizLoading from "../components/quiz-loading";
 import { Button, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useQuizStore } from "../store/quiz-store";

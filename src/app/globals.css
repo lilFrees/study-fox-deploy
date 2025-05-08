@@ -1,9 +1,17 @@
 @import "tailwindcss";
+@import "tailwindcss/utilities" important;
 
 :root {
   --background: #fafafa;
   --foreground: #171717;
   --primary: #ff3718;
+  --success: #2ab514;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
@@ -12,17 +20,27 @@
   --background: #171717;
   --foreground: #fafafa;
   --primary: #ff3718;
+  --success: #2ab514;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
+  --color-primary: #ff3718;
+  --color-success: #2ab514;
   --font-sans: var(--font-jakarta-sans);
   --font-mono: var(--font-raleway);
 }
 
-@import "tailwindcss/utilities" important;
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 body {
   background: var(--background);

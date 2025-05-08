@@ -56,8 +56,8 @@ function ProfilePopover() {
             <Image
               src={user?.photoUrl}
               alt="Profile image"
-              width={40}
-              height={40}
+              width={30}
+              height={30}
             />
           ) : (
             <FaCircleUser className="text-[30px]" />

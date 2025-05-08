@@ -28,6 +28,10 @@ export const signInWithGoogle = async () => {
       userID: authUser?.uid,
     });
 
+    if (!result) {
+      throw new Error("Failed to sign in with Google");
+    }
+
     const user: IUser = {
       username: result.username,
       displayName: authUser.displayName,

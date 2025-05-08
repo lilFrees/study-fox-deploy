@@ -3,3 +3,8 @@ export interface IQuestion {
   question: string;
   choices: string[];
 }
+
+export interface IQuestionWithAnswer extends IQuestion {
+  questionNumber: number;
+  answer: string | null;
+}
