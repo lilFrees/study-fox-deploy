@@ -1,19 +1,22 @@
 "use client";
 
-import { Button, Typography } from "antd";
-import { useQuizStore } from "../store/quiz-store";
-import { twMerge } from "tailwind-merge";
 import { useEffect } from "react";
+
+import { Button, Typography } from "antd";
+
 import { FaCheck } from "react-icons/fa6";
+import { twMerge } from "tailwind-merge";
+
+import { useQuizStore } from "../store/quiz-store";
 
 function QuizPlaySideBar() {
-  const { currentQuestion, questions, setCurrentQuestion } = useQuizStore();
+  const { currentQuestion, setCurrentQuestion, quiz } = useQuizStore();
 
   useEffect(() => {
     if (!currentQuestion) {
-      setCurrentQuestion(questions[0]);
+      setCurrentQuestion(quiz?.quizlist[0] || null);
     }
-  }, [currentQuestion, questions, setCurrentQuestion]);
+  }, [currentQuestion, quiz?.quizlist, setCurrentQuestion]);
 
   return (
     <div className="h-full basis-1/3">
@@ -21,12 +24,12 @@ function QuizPlaySideBar() {
         level={3}
         className="w-full px-8 pb-8 font-sans text-2xl"
       >
-        Quiz Topic Title
+        {quiz?.title}
       </Typography.Title>
       <div className="relative h-[600px] overflow-hidden rounded-3xl bg-[#D9D9D9] dark:bg-[#2D2D2D]">
         <div className="absolute top-0 -right-[13px] bottom-0 left-0 h-full overflow-auto pr-[13px]">
           <div className="flex flex-col px-4 py-8">
-            {questions?.map((question) => {
+            {quiz?.quizlist?.map((question) => {
               const isAnswered = question.answer !== null;
               const isCurrent = question.quizId === currentQuestion?.quizId;
               return (

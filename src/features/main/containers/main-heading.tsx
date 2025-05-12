@@ -10,12 +10,10 @@ function MainHeading() {
         level={1}
         className="font-mono text-6xl leading-[66px] font-normal"
       >
-        Generate special <br /> quizzes from <br /> your own file or choose
-        popular <br /> ones.
+        Study Smarter with <br /> AI-Powered Learning <br /> Tools
       </Typography.Title>
       <Typography.Paragraph className="text-base" type="secondary">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Vehicula
-        massa in enim luctus. Rutrum arcu.
+        Generate Quizzes from Your Study Materials Instantly
       </Typography.Paragraph>
 
       <MainContentUpload />

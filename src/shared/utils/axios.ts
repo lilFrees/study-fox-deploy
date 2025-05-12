@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios, { AxiosError } from "axios";
 import { getCookie } from "cookies-next";
+import { useAuthStore } from "../store/auth-store";
 
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -36,22 +37,31 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => response.data,
   async (error: AxiosError) => {
-    if (error.config?.method !== "get") {
-      console.error("Server returned the error below: ", error);
-      if (error.status === 500) {
-        notification.error({ message: "Server error" });
-      } else if (typeof error?.response?.data === "object") {
-        Object.keys(error?.response?.data as any).forEach((key) => {
-          notification.error({
-            message: (error?.response?.data as any)?.[key],
-          });
-        });
-      } else {
-        notification.error({
-          message: "Something went wrong, please try again later ",
-          icon: "❌",
-        });
-      }
+    const data: any = error?.response?.data;
+    if (error?.response?.status === 401) {
+      notification.error({
+        message: "Session expired",
+        description: "Please login again",
+        icon: "⌛",
+      });
+      localStorage.removeItem("access_token");
+      useAuthStore.setState({ user: null });
+      window.location.href = "/auth/login";
+    }
+
+    if (error.status === 500) {
+      notification.error({ message: "Server error" });
+    } else if (data?.message) {
+      notification?.error({
+        message: data?.message,
+        description: data?.cause,
+        icon: "❌",
+      });
+    } else {
+      notification.error({
+        message: "Something went wrong, please try again later ",
+        icon: "❌",
+      });
     }
     return Promise.reject(error);
   },

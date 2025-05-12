@@ -1,13 +1,13 @@
 import request from "@/shared/utils/axios";
-import { IQuestion } from "../types";
+import { IQuizCheckParams, IQuizResponse } from "../types";
 
 export async function generateQuizWithContext(params: {
   quizCount: number;
   context: string;
   username: string;
-}): Promise<IQuestion[]> {
+}): Promise<IQuizResponse> {
   const { username, ...data } = params;
-  const res: IQuestion[] = await request({
+  const res: IQuizResponse = await request({
     url: `/quiz-service/quiz/${username}/generate`,
     method: "POST",
     data,
@@ -18,10 +18,19 @@ export async function generateQuizWithContext(params: {
 export async function generateQuizWithFile(params: {
   username: string;
   data: FormData;
-}): Promise<any> {
+}): Promise<IQuizResponse> {
   const { username, data } = params;
-  return await request({
+  const res: IQuizResponse = await request({
     url: `/quiz-service/quiz/${username}/document-generate`,
+    method: "POST",
+    data,
+  });
+  return res;
+}
+
+export async function getQuizResult(data: IQuizCheckParams) {
+  return await request({
+    url: "/quiz-service/quiz/check",
     method: "POST",
     data,
   });

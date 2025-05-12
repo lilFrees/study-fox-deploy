@@ -110,7 +110,7 @@ export async function registerWithPassword(data: {
 export async function signOut() {
   localStorage.removeItem("access_token");
   useAuthStore.setState({ user: null });
-  useQuizStore.setState({ questions: [], status: "stale", mode: null });
+  useQuizStore.setState({ quiz: null, status: "stale", mode: null });
   useUploadedFileStore.setState({ file: null, textContent: null });
 
   await fetch("/api/sign-out", {

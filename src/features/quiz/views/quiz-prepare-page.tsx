@@ -1,8 +1,10 @@
 "use client";
 
+import { dataURLToFile } from "@/shared/helpers";
 import { useAuthStore } from "@/shared/store/auth-store";
 import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 import { useQuery } from "@tanstack/react-query";
+import { Button, Typography } from "antd";
 import {
   animate,
   AnimatePresence,
@@ -10,55 +12,66 @@ import {
   useMotionValue,
   useTransform,
 } from "motion/react";
-import { generateQuizWithContext, generateQuizWithFile } from "../api";
-import QuizLoading from "../components/quiz-loading";
-import { Button, Typography } from "antd";
-import { useEffect, useState } from "react";
-import { useQuizStore } from "../store/quiz-store";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { generateQuizWithContext, generateQuizWithFile } from "../api";
+import { useQuizStore } from "../store/quiz-store";
 
 function QuizPreparePage() {
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
-
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const { push } = useRouter();
   const { textContent, file } = useUploadedFileStore();
-  const { setQuestions, setMode, setStatus } = useQuizStore();
+  const { setMode, setStatus, setQuiz } = useQuizStore();
   const { user } = useAuthStore();
 
   const progress = useMotionValue(0);
   const progressTransform = useTransform(progress, (latest) => latest);
 
-  const { isSuccess, isLoading } = useQuery({
+  const {} = useQuery({
     queryKey: ["quiz"],
     queryFn: () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 5 * 1000);
-      });
-      // if (textContent) {
-      //   const response = generateQuizWithContext({
-      //     username: user?.username || "",
-      //     context: textContent,
-      //     quizCount: 10,
-      //   });
+      // return new Promise((resolve) => {
+      //   setTimeout(() => {
+      //     resolve(true);
+      //   }, 5 * 1000);
+      // });
+      if (textContent) {
+        const response = generateQuizWithContext({
+          username: user?.username || "",
+          context: textContent,
+          quizCount: 10,
+        });
 
-      //   response.then((r) => setQuestions(r));
+        response.then((r) => {
+          setQuiz(r);
+          setIsSuccess(true);
+        });
 
-      //   return response;
-      // }
-      // else if (file) {
-      //   const formData = new FormData();
-      //   formData.append("file", file.url);
-      //   formData.append("quizCount", "10");
-      //   return generateQuizWithFile({
-      //     username: user?.username || "",
-      //     data: formData,
-      //   });
-      // }
+        return response;
+      } else if (file) {
+        const fileFromURL = dataURLToFile(file.url);
+        console.log(fileFromURL);
+        const formData = new FormData();
+        formData.append("quizFile", fileFromURL);
+        formData.append("quizCount", "10");
+        const response = generateQuizWithFile({
+          username: user?.username || "",
+          data: formData,
+        });
+
+        response.then((r) => {
+          setQuiz(r);
+          setIsSuccess(true);
+        });
+
+        return response;
+      }
     },
-
+    throwOnError: true,
+    refetchOnWindowFocus: false,
     retry: 0,
+    gcTime: 0,
   });
 
   useEffect(() => {
@@ -79,7 +92,7 @@ function QuizPreparePage() {
   return (
     <div>
       <AnimatePresence mode="wait">
-        {loadingProgress < 100 ? (
+        {loadingProgress < 100 && (
           <motion.div
             className="container mt-40 flex h-full w-full flex-col items-center justify-center"
             initial={{ opacity: 0 }}
@@ -103,7 +116,8 @@ function QuizPreparePage() {
               />
             </div>
           </motion.div>
-        ) : (
+        )}
+        {loadingProgress === 100 && (
           <motion.div
             className="container mt-16 flex h-full w-full flex-col items-center justify-center gap-20"
             initial={{ opacity: 0 }}

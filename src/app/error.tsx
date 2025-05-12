@@ -1,7 +1,9 @@
 "use client";
 
 import Providers from "@/shared/providers";
+import { IError } from "@/shared/types";
 import { Button, Typography } from "antd";
+import { AxiosError } from "axios";
 import { Plus_Jakarta_Sans, Raleway } from "next/font/google";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -14,7 +16,18 @@ const raleway = Raleway({
   subsets: ["latin"],
 });
 
-function NotFoundPage() {
+function ErrorPage({
+  error,
+}: {
+  error: (Error & { digest?: string }) | AxiosError<IError>;
+}) {
+  const mainError =
+    (error as AxiosError<IError>)?.response?.data?.message ||
+    error?.message ||
+    "Something went wrong";
+  const description =
+    (error as AxiosError<IError>)?.response?.data?.cause ||
+    "Please try again later";
   return (
     <html suppressHydrationWarning>
       <body
@@ -22,9 +35,15 @@ function NotFoundPage() {
       >
         <Providers>
           <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
-            <Typography.Title className="text-4xl">
-              Something went wrong
+            <Typography.Title
+              className="line-clamp-3 max-w-[30ch] text-center text-4xl"
+              title={mainError}
+            >
+              {mainError}
             </Typography.Title>
+            <Typography.Text className="text-lg" title={description}>
+              {description}
+            </Typography.Text>
             <div className="flex items-center gap-5">
               <Button type="dashed" href="/" size="large">
                 Go back home
@@ -44,4 +63,4 @@ function NotFoundPage() {
   );
 }
 
-export default NotFoundPage;
+export default ErrorPage;

@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_FIREBASE_APP_ID: "1:38242968511:web:f31c5c94bce56401ba770a",
     NEXT_PUBLIC_FIREBASE_MEASURMENT_ID: "G-WZLEPG0R6G",
   },
+  reactStrictMode: false,
+  images: {
+    remotePatterns: [{ hostname: "lh3.googleusercontent.com" }],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

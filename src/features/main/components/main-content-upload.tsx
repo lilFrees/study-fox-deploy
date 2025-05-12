@@ -19,6 +19,7 @@ function MainContentUpload() {
   const handleClick = () => {
     const input = document.createElement("input");
     input.type = "file";
+    input.accept = ".txt,.pdf";
     input.onchange = (event) => {
       const file = (event.target as HTMLInputElement)?.files?.[0];
       const fileReader = new FileReader();
@@ -48,7 +49,7 @@ function MainContentUpload() {
       <div className="absolute top-0 -right-5 bottom-0 left-0 overflow-auto">
         <Input.TextArea
           size="large"
-          className="mb-0 h-full border-0 bg-white pr-[140px] pl-10 font-mono text-lg text-black placeholder:text-gray-600"
+          className="mb-0 h-full border-0 bg-white pt-[16px] pr-[140px] pl-10 font-mono text-lg text-black placeholder:text-gray-600"
           placeholder="Choose popular quiz themes"
           rows={5}
           value={text || ""}

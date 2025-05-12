@@ -4,3 +4,9 @@ export interface IUser {
   email: string;
   photoUrl: string;
 }
+
+export interface IError {
+  cause: string;
+  message: string;
+  statusCode: string;
+}

@@ -1,11 +1,27 @@
 "use client";
 
+import { useQuizStore } from "@/features/quiz/store/quiz-store";
+import { useTimeStore } from "@/features/quiz/store/time-store";
 import BgEclipse from "@/shared/icons/bg-shape";
-import MainHeading from "../containers/main-heading";
+import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
+import MainHeading from "../containers/main-heading";
+import { usePathname } from "@/i18n/navigation";
 
 function MainPage() {
   const { theme } = useTheme();
+  const { reset } = useQuizStore();
+  const { setTime } = useTimeStore();
+  const { setTextContent, setFile } = useUploadedFileStore();
+  const path = usePathname();
+
+  useEffect(() => {
+    reset();
+    setTime(null);
+    setTextContent(null);
+    setFile(null);
+  }, [reset, setFile, setTextContent, setTime, path]);
 
   return (
     <div className="container mx-auto mt-10 flex gap-5 px-2">
