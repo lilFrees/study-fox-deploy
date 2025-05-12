@@ -1,5 +1,5 @@
 import request from "@/shared/utils/axios";
-import { IQuizCheckParams, IQuizResponse } from "../types";
+import { IQuizCheckResponse, IQuizCheckParams, IQuizResponse } from "../types";
 
 export async function generateQuizWithContext(params: {
   quizCount: number;
@@ -28,7 +28,9 @@ export async function generateQuizWithFile(params: {
   return res;
 }
 
-export async function getQuizResult(data: IQuizCheckParams) {
+export async function getQuizResult(
+  data: IQuizCheckParams,
+): Promise<IQuizCheckResponse> {
   return await request({
     url: "/quiz-service/quiz/check",
     method: "POST",

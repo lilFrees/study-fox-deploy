@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IQuestionWithAnswer, IQuizResponse, IStoredQuiz } from "../types";
+import {
+  IQuizCheckResponse,
+  IQuestionWithAnswer,
+  IQuizResponse,
+  IStoredQuiz,
+} from "../types";
 
 export type TQuizState = "completed" | "pending" | "stale";
 
@@ -17,6 +22,9 @@ export interface IQuizStore {
   mode: "timed" | "normal" | null;
   setMode: (mode: "timed" | "normal" | null) => void;
   reset: () => void;
+  result: IQuizCheckResponse | null;
+  setResult: (result: IQuizCheckResponse | null) => void;
+  restart: () => void;
 }
 
 export const useQuizStore = create<IQuizStore>()(
@@ -83,7 +91,30 @@ export const useQuizStore = create<IQuizStore>()(
       setStatus: (status) => set({ status }),
       mode: null,
       setMode: (mode) => set({ mode }),
-      reset: () => set({ quiz: null, currentQuestion: null, status: "stale" }),
+      result: null,
+      setResult: (result) => set({ result }),
+      reset: () =>
+        set({
+          quiz: null,
+          currentQuestion: null,
+          status: "stale",
+          result: null,
+        }),
+      restart: () =>
+        set((state) => ({
+          quiz: {
+            ...state.quiz!,
+            quizlist:
+              state.quiz?.quizlist?.map((q) => ({
+                ...q,
+                answer: null,
+              })) || [],
+          },
+          result: null,
+          currentQuestion: null,
+          status: "stale",
+          mode: null,
+        })),
     }),
     { name: "quiz-store" },
   ),

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
+import dayjs from "dayjs";
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import { useTimer } from "react-timer-hook";
 import { useTimerResultType } from "react-timer-hook/dist/types/src/useTimer";
@@ -9,13 +9,14 @@ import { getQuizResult } from "../api";
 import QuizCompleteLoading from "../components/quiz-complete-loading";
 import { IQuizStore, useQuizStore } from "../store/quiz-store";
 import { useTimeStore } from "../store/time-store";
-import { IQuizCheckParams } from "../types";
+import { IQuizCheckParams, IQuizCheckResponse } from "../types";
+import QuizResults from "../views/quiz-results";
 
 interface QuizPlayContextType {
   store: IQuizStore;
   timerStore?: useTimerResultType;
   checkQuizMutation: UseMutationResult<
-    AxiosResponse<any, any>,
+    IQuizCheckResponse,
     Error,
     IQuizCheckParams,
     unknown
@@ -31,17 +32,19 @@ export default function QuizPlayProvider({
 }) {
   const store = useQuizStore();
   const { time, setTime } = useTimeStore();
+  const { setStatus, status, setResult } = store;
 
   useEffect(() => {
-    if (time === null && store.mode === "timed") {
-      const currentTime = new Date();
-      currentTime.setMinutes(currentTime.getMinutes() + 10);
-      setTime(currentTime);
+    if (time === null) {
+      const curr = dayjs().add(10, "minutes").toDate();
+      setTime(curr);
     }
-  }, [setTime, time, store.mode]);
+  }, [setTime, time]);
+
+  const currentTime = dayjs().add(10, "minutes").toDate();
 
   const timerStore = useTimer({
-    expiryTimestamp: time ? new Date(time) : new Date(),
+    expiryTimestamp: new Date(time || currentTime),
     autoStart: true,
   });
 
@@ -49,9 +52,14 @@ export default function QuizPlayProvider({
     mutationKey: ["quiz-result"],
     mutationFn: getQuizResult,
     onSuccess: (data) => {
-      console.log("Quiz result:", data);
+      setStatus("completed");
+      setResult(data);
     },
   });
+
+  if (status === "completed") {
+    return <QuizResults />;
+  }
 
   if (timerStore.totalSeconds === 0 && store.mode === "timed") {
     return <QuizCompleteLoading />;

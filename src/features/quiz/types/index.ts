@@ -28,3 +28,11 @@ export interface IQuizCheckParams {
     answer: string;
   }[];
 }
+
+export interface IQuizCheckResponse {
+  quizzes: { correctAnswer: string; explanation: string; correct: boolean }[];
+  totalQuestions: number;
+  correctAnsweredQuestions: number;
+  score: number;
+  passed: boolean;
+}

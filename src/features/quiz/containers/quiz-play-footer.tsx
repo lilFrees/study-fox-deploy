@@ -25,10 +25,12 @@ function QuizPlayFooter() {
     }
     checkQuizMutation.mutate({
       quizSectionID: quiz?.quizSectionID,
-      quizzes: quiz?.quizlist?.map((q) => ({
-        quizId: q.quizId,
-        answer: q.answer!,
-      })),
+      quizzes: quiz?.quizlist
+        ?.filter((q) => q.answer !== null)
+        ?.map((q) => ({
+          quizId: q.quizId,
+          answer: q.answer as string,
+        })),
     });
   };
 
@@ -40,10 +42,11 @@ function QuizPlayFooter() {
         </Button>
       )}
       <Button
-        className="w-[215px]"
+        className="ml-auto w-[215px]"
         size="large"
         type="text"
         onClick={shouldFinish ? handleFinish : next}
+        loading={checkQuizMutation.isPending}
       >
         {shouldFinish ? "Finish" : "Next"}
       </Button>

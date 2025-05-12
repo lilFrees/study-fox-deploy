@@ -51,7 +51,6 @@ function QuizPreparePage() {
         return response;
       } else if (file) {
         const fileFromURL = dataURLToFile(file.url);
-        console.log(fileFromURL);
         const formData = new FormData();
         formData.append("quizFile", fileFromURL);
         formData.append("quizCount", "10");
@@ -135,7 +134,7 @@ function QuizPreparePage() {
               <Button
                 size="large"
                 type="primary"
-                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300/70"
+                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300"
                 onClick={() => {
                   setMode("timed");
                   setStatus("pending");
@@ -147,7 +146,7 @@ function QuizPreparePage() {
               <Button
                 size="large"
                 type="primary"
-                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300/70"
+                className="w-full max-w-[450px] border-0 bg-slate-200 text-lg text-black hover:bg-slate-300"
                 onClick={() => {
                   setMode("normal");
                   setStatus("pending");
