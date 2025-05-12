@@ -16,16 +16,14 @@ export const signInWithGoogle = async () => {
     const response = await signInWithPopup(auth, provider);
     const authUser = response.user;
 
+    const token = (response.user as any).stsTokenManager.accessToken;
+
     if (!authUser.displayName || !authUser.email || !authUser.uid) {
       throw new Error("User data is incomplete");
     }
 
     const result = await withGoogle({
-      email: authUser?.email,
-      displayName: authUser?.displayName,
-      photoUrl: authUser?.photoURL || "",
-      providerName: "google",
-      userID: authUser?.uid,
+      accessToken: token,
     });
 
     if (!result) {

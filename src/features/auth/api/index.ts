@@ -26,11 +26,7 @@ export async function signIn(data: {
 }
 
 export async function withGoogle(data: {
-  userID: string;
-  email: string;
-  displayName: string;
-  photoUrl: string;
-  providerName: string;
+  accessToken: string;
 }): Promise<ISignInResponse> {
   return await request({
     url: "/user-service/auth/google-auth",
