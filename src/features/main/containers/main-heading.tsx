@@ -8,9 +8,10 @@ function MainHeading() {
     <div className="z-20 basis-1/2 space-y-10 pb-[185px]">
       <Typography.Title
         level={1}
-        className="font-mono text-6xl leading-[66px] font-normal"
+        className="max-w-[15ch] font-mono text-6xl leading-[66px] font-normal"
       >
-        Study Smarter with <br /> AI-Powered Learning <br /> Tools
+        Study Smarter with <span className="text-primary">AI-Powered</span>{" "}
+        Learning Tools
       </Typography.Title>
       <Typography.Paragraph className="text-base" type="secondary">
         Generate Quizzes from Your Study Materials Instantly
