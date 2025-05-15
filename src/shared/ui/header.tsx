@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DarkModeBtn from "./dark-mode-btn";
 import Logo from "./logo";
-import { useAuthStore } from "../store/auth-store";
+import { useAuthStore } from "../../entities/user/model/useAuthStore";
 import ProfilePopover from "../components/profile-popover";
 
 const headerLinks: any = [

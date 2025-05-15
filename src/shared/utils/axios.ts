@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import axios, { AxiosError } from "axios";
 import { getCookie } from "cookies-next";
-import { useAuthStore } from "../store/auth-store";
+import { useAuthStore } from "../../entities/user/model/useAuthStore";
 
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 

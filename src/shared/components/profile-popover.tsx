@@ -5,7 +5,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { FaChevronDown, FaUser } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 
-import { useAuthStore } from "../store/auth-store";
+import { useAuthStore } from "../../entities/user/model/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
 import { signOut } from "@/features/auth/api/auth-handlers";
 import Image from "next/image";

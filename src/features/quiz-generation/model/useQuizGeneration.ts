@@ -4,7 +4,7 @@ import {
   generateQuizWithContext,
   generateQuizWithFile,
 } from "../api/generateQuiz";
-import { useAuthStore } from "@/shared/store/auth-store";
+import { useAuthStore } from "@/entities/user/model/useAuthStore";
 import { useQuizStore } from "@/entities/quiz/model/useQuizStore";
 import { dataURLToFile } from "@/shared/helpers";
 

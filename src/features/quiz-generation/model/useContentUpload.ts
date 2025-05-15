@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/shared/store/auth-store";
+import { useAuthStore } from "@/entities/user/model/useAuthStore";
 import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

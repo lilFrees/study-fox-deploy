@@ -1,8 +1,8 @@
 "use client";
 
 import { auth } from "@/config/firebase";
-import { useAuthStore } from "@/shared/store/auth-store";
-import { IUser } from "@/shared/types";
+import { useAuthStore } from "@/entities/user/model/useAuthStore";
+import { IUser } from "@/entities/user/types";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signIn, signUp, withGoogle } from ".";
 import { message } from "antd";
