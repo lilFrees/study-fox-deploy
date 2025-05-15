@@ -1,4 +1,4 @@
-import SignUpPage from "@/features/auth/views/sign-up-page";
+import SignUpPage from "@/features/auth/ui/SignUpPage";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

@@ -7,7 +7,6 @@ export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const request = axios.create({
   baseURL,
-  withCredentials: false,
 });
 
 request.interceptors.request.use(
@@ -35,10 +34,14 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    console.log("axios response", response);
+    return response.data;
+  },
   async (error: AxiosError) => {
     const data: any = error?.response?.data;
-    if (error?.response?.status === 401) {
+    console.log("axios error", error, error?.status);
+    if (error?.status === 401) {
       notification.error({
         message: "Session expired",
         description: "Please login again",
@@ -59,7 +62,8 @@ request.interceptors.response.use(
       });
     } else {
       notification.error({
-        message: "Something went wrong, please try again later ",
+        message:
+          error?.message || "Something went wrong, please try again later ",
         icon: "❌",
       });
     }

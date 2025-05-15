@@ -6,7 +6,7 @@ import { IUser } from "@/shared/types";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signIn, signUp, withGoogle } from ".";
 import { message } from "antd";
-import { useQuizStore } from "@/features/quiz/store/quiz-store";
+import { useQuizStore } from "@/entities/quiz/model/useQuizStore";
 import { useUploadedFileStore } from "@/shared/store/uploaded-file-store";
 
 const provider = new GoogleAuthProvider();

@@ -1,4 +1,4 @@
-import SignInPage from "@/features/auth/views/sign-in-page";
+import SignInPage from "@/features/auth/ui/SignInPage";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

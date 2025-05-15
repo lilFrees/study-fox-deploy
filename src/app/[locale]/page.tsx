@@ -1,5 +1,5 @@
-import MainPage from "@/features/main/views/main-page";
+import HomePage from "@/features/home/ui/HomePage";
 
 export default function Home() {
-  return <MainPage />;
+  return <HomePage />;
 }
