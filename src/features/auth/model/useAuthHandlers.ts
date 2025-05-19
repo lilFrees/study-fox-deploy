@@ -20,7 +20,7 @@ function useAuthHandlers() {
       if (searchParams.get("source") === "upload") {
         push("/quiz-generation");
       } else {
-        push("/profile");
+        push("/account/home");
       }
     },
   });
@@ -33,7 +33,7 @@ function useAuthHandlers() {
       if (searchParams.get("source") === "upload") {
         push("/quiz-generation");
       } else {
-        push("/profile");
+        push("/account/home");
       }
     },
   });
@@ -46,7 +46,7 @@ function useAuthHandlers() {
       if (searchParams.get("source") === "upload") {
         push("/quiz-generation");
       } else {
-        push("/profile");
+        push("/account/home");
       }
     },
   });

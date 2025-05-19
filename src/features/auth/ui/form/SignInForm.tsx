@@ -6,6 +6,7 @@ function SignInForm() {
   const [form] = Form.useForm<ISignInForm>();
 
   const { loginMutate } = useAuthHandlers();
+
   return (
     <Form
       layout="vertical"
@@ -13,6 +14,7 @@ function SignInForm() {
       onFinish={loginMutate.mutate}
       className="flex flex-col"
       requiredMark={false}
+      validateTrigger="onSubmit"
     >
       <Form.Item
         label="Email"

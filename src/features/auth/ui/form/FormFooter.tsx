@@ -16,7 +16,7 @@ function FormFooter({ type }: FormFooterProps) {
   const { googleSignInMutation } = useAuthHandlers();
 
   return (
-    <div>
+    <div className="space-y-4">
       <GoogleAuthButton
         onClick={googleSignInMutation.mutate}
         isLoading={googleSignInMutation.isPending}
@@ -24,7 +24,7 @@ function FormFooter({ type }: FormFooterProps) {
       <Typography.Paragraph className="text-center text-sm">
         {type === "sign-up"
           ? "Already have an account? Sign in"
-          : "Don&apos;t have account yet? Register"}
+          : "Don't have account yet? Register"}{" "}
         <Link
           href={{
             pathname: type === "sign-up" ? "/auth/sign-in" : " /auth/sign-up",

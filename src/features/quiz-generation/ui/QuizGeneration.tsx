@@ -3,18 +3,18 @@
 import { AnimatePresence } from "motion/react";
 
 import useQuizGeneration from "../model/useQuizGeneration";
+
 import LoadingState from "./LoadingState";
 import SuccessState from "./SuccessState";
 
 function QuizGeneration() {
-  const { isSuccess, isLoading } = useQuizGeneration();
-  const progress = isSuccess ? 100 : isLoading ? 50 : 0;
+  const { loadingProgress } = useQuizGeneration();
 
   return (
     <div>
       <AnimatePresence mode="wait">
-        {progress < 100 && <LoadingState progress={progress} />}
-        {progress === 100 && <SuccessState />}
+        {loadingProgress < 100 && <LoadingState progress={loadingProgress} />}
+        {loadingProgress === 100 && <SuccessState />}
       </AnimatePresence>
     </div>
   );

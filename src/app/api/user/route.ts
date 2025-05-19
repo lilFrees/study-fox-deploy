@@ -6,7 +6,7 @@ export async function GET() {
 
   const token = cookieStore.get("access_token");
   const user = cookieStore.get("user");
-  if (!token) {
+  if (!token || token.value === "undefined") {
     cookieStore.delete("access_token");
     cookieStore.delete("user");
     return NextResponse.json({ message: "Token not found" }, { status: 401 });

@@ -35,7 +35,7 @@ function ProfilePopover() {
           <Button
             type="link"
             className="text-foreground hover:bg-foreground/5 flex items-center"
-            href="/profile"
+            href="/account/home"
           >
             <FaUser /> Profile
           </Button>

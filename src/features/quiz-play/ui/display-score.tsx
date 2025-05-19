@@ -37,7 +37,7 @@ function QuizResults() {
           type="dashed"
           size="large"
           className="w-[400px]"
-          onClick={() => push("/profile")}
+          onClick={() => push("/account/home")}
         >
           Back to home
         </Button>

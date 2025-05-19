@@ -6,7 +6,7 @@ async function SignUp() {
   const cookiesStore = await cookies();
 
   if (cookiesStore.get("access_token") && cookiesStore.get("user")) {
-    redirect("/profile");
+    redirect("/account/home");
   }
 
   return (

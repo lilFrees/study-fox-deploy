@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 function QuizGenerationPage() {
   return (
-    <div className="container mx-auto h-full">
+    <div className="container mx-auto">
       <Suspense fallback={<LoadingLogo />}>
         <QuizGeneration />
       </Suspense>
