@@ -8,8 +8,8 @@ import { FaUser } from "react-icons/fa6";
 function ProfileDisplay() {
   const { user } = useAuthStore();
   return (
-    <div className="flex items-center gap-2">
-      <div className="h-14 w-14 overflow-hidden rounded-xl">
+    <div className="flex items-start gap-4">
+      <div className="mt-1 h-14 w-14 shrink-0 overflow-hidden rounded-xl">
         {user?.photoUrl ? (
           <Image
             src={user?.photoUrl}
@@ -24,7 +24,7 @@ function ProfileDisplay() {
       </div>
       <div className="space-y-1 *:block">
         <Typography.Text className="text-2xl font-semibold">
-          Drake
+          {user?.displayName || user?.username || ""}
         </Typography.Text>
         <Typography.Text className="text-base font-medium">
           Basic User

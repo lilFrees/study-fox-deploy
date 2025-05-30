@@ -26,7 +26,7 @@ function AntdConfigProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ConfigProvider theme={darkMode ? darkTheme : lightTheme}>
-      <App className="h-full">{children}</App>
+      <App className="flex h-full flex-col">{children}</App>
     </ConfigProvider>
   );
 }

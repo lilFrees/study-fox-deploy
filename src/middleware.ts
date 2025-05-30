@@ -11,8 +11,6 @@ export default async function middleware(request: NextRequest) {
     request.nextUrl.pathname.includes(route),
   );
 
-  console.log(request.nextUrl.pathname.split("/")[1]);
-
   if (isProtectedRoute) {
     if (!accessToken) {
       const redirectUrl = new URL(`/${locale}/auth/sign-in`, request.url);

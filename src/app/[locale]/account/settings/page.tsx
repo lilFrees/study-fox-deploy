@@ -1,5 +1,7 @@
+import InDevelopment from "@/shared/ui/in-development";
+
 function SettingsPage() {
-  return <div>Settings page</div>;
+  return <InDevelopment />;
 }
 
 export default SettingsPage;

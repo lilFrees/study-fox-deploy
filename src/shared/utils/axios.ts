@@ -35,12 +35,10 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    console.log("axios response", response);
     return response.data;
   },
   async (error: AxiosError) => {
     const data: any = error?.response?.data;
-    console.log("axios error", error, error?.status);
     if (error?.status === 401) {
       notification.error({
         message: "Session expired",

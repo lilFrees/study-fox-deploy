@@ -1,5 +1,7 @@
+import InDevelopment from "@/shared/ui/in-development";
+
 function MoreToolsPage() {
-  return <div>More tools page</div>;
+  return <InDevelopment />;
 }
 
 export default MoreToolsPage;

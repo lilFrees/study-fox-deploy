@@ -1,21 +1,7 @@
-import { cookies } from "next/headers";
-
-import { redirect } from "next/navigation";
-
-import Dashboard from "@/features/account/home/ui/Dashboard";
+import AccountHome from "@/features/account/ui/home/AccountHome";
 
 async function ProfilePage() {
-  const cookieStore = await cookies();
-  const user = cookieStore.get("user");
-  if (!user) {
-    redirect("/auth/sign-in");
-  }
-
-  return (
-    <div className="container mx-auto">
-      <Dashboard />
-    </div>
-  );
+  return <AccountHome />;
 }
 
 export default ProfilePage;

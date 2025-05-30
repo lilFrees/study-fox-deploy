@@ -1,7 +1,7 @@
 import InDevelopment from "@/shared/ui/in-development";
 
-function LibraryPage() {
+function ClassRoomPage() {
   return <InDevelopment />;
 }
 
-export default LibraryPage;
+export default ClassRoomPage;
