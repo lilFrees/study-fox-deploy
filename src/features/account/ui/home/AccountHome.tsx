@@ -10,7 +10,7 @@ import RecommendedQuizzes from "./recommended/RecommendedQuizzes";
 function AccountHome() {
   const { user } = useAuthStore();
   return (
-    <div className="flex flex-col gap-5">
+    <div className="mt-10 flex flex-col gap-10">
       <Typography.Title
         level={2}
         className="text-foreground text-3xl font-medium"
