@@ -17,9 +17,11 @@ export default async function AuthLayout({
   }
 
   return (
-    <div className="container flex grow gap-5">
-      <Sidebar />
-      {children}
+    <div className="relative min-h-screen">
+      <div className="container flex grow gap-5">
+        <Sidebar />
+        {children}
+      </div>
     </div>
   );
 }
