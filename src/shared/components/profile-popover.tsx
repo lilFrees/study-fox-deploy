@@ -1,26 +1,18 @@
 "use client";
 
-import { App, Button, Popover, Typography } from "antd";
-import { FaCircleUser } from "react-icons/fa6";
+import { Button, Popover, Typography } from "antd";
 import { FaChevronDown, FaUser } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
 import { MdOutlineExitToApp } from "react-icons/md";
 
-import { useAuthStore } from "../../entities/user/model/useAuthStore";
-import { useMutation } from "@tanstack/react-query";
-import { signOut } from "@/features/auth/api/auth-handlers";
+import useAuthHandlers from "@/features/auth/model/useAuthHandlers";
 import Image from "next/image";
+import { useAuthStore } from "../../entities/user/model/useAuthStore";
 
 function ProfilePopover() {
   const { user } = useAuthStore();
-  const { message } = App.useApp();
 
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: signOut,
-    onSuccess: () => {
-      message.success("You have successfully logged out");
-    },
-  });
+  const { logoutMutation } = useAuthHandlers();
 
   if (user === null) {
     return null;
@@ -42,8 +34,8 @@ function ProfilePopover() {
           <Button
             type="link"
             className="text-foreground hover:bg-foreground/5"
-            onClick={() => mutate()}
-            loading={isPending}
+            onClick={() => logoutMutation?.mutate()}
+            loading={logoutMutation?.isPending}
           >
             <MdOutlineExitToApp />
             Logout

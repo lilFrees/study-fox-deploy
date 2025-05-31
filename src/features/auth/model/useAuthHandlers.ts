@@ -5,6 +5,7 @@ import {
   registerWithPassword,
   signInWithGoogle,
   signInWithPassword,
+  signOut,
 } from "../api/auth-handlers";
 
 function useAuthHandlers() {
@@ -51,7 +52,21 @@ function useAuthHandlers() {
     },
   });
 
-  return { googleSignInMutation, loginMutate, registerMutation };
+  const logoutMutation = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: signOut,
+    onSuccess: () => {
+      message.success("You have successfully logged out");
+      push("auth/sign-in");
+    },
+  });
+
+  return {
+    googleSignInMutation,
+    loginMutate,
+    registerMutation,
+    logoutMutation,
+  };
 }
 
 export default useAuthHandlers;
