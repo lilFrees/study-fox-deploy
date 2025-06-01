@@ -1,4 +1,4 @@
-import InDevelopment from "@/shared/ui/in-development";
+import InDevelopment from "@/widgets/InDevelopment";
 
 function LibraryPage() {
   return <InDevelopment />;

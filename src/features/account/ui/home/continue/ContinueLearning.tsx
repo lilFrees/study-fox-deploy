@@ -1,4 +1,4 @@
-import ViewAllButton from "@/shared/ui/ViewAllButton";
+import ViewAllButton from "@/widgets/ViewAllButton";
 import { Typography } from "antd";
 import ContinueLessons from "./ContinueLessons";
 

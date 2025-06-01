@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import ViewAllButton from "@/shared/ui/ViewAllButton";
+import ViewAllButton from "@/widgets/ViewAllButton";
 import RecommendedQuizTable from "./RecommendedQuizTable";
 
 function RecommendedQuizzes() {

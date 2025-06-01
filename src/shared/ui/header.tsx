@@ -4,7 +4,7 @@ import { Button } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Marquee from "react-fast-marquee";
-import DarkModeBtn from "./dark-mode-btn";
+import DarkModeBtn from "../../widgets/DarkModeBtn";
 import Logo from "./logo";
 import { useAuthStore } from "../../entities/user/model/useAuthStore";
 import ProfilePopover from "../components/profile-popover";
